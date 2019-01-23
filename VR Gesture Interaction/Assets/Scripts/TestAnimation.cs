@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TestAnimation : MonoBehaviour
 {
-
     private Animator animator;
 
     void Awake()
@@ -42,6 +41,5 @@ public class TestAnimation : MonoBehaviour
         {
             animator.SetTrigger("Shocked");
         }
-
     }
 }
