@@ -5,6 +5,13 @@ using UnityEngine;
 public class TestAnimation : MonoBehaviour
 {
 
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +25,23 @@ public class TestAnimation : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.D))
         {
-            GetComponent<Animator>().SetTrigger("Dance");
+            animator.SetTrigger("ToAngry");
         }
 
         if(Input.GetKeyDown(KeyCode.A))
         {
-            GetComponent<Animator>().SetTrigger("Wave");
+            animator.SetTrigger("Wave");
         }
 
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            animator.SetTrigger("Shake");
+        }
+
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            animator.SetTrigger("Shocked");
+        }
 
     }
 }
