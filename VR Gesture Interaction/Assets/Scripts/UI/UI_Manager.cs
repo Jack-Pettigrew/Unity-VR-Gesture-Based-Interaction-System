@@ -10,6 +10,7 @@ public class UI_Manager : MonoBehaviour
 
     // UI Variables
     private bool _nightMode = false;
+    private bool _mainMenuActive = true;
 
     // UI Handles
     [SerializeField]
@@ -47,7 +48,7 @@ public class UI_Manager : MonoBehaviour
     }
 
     // Triggers UI Night Mode animation
-    void FadeNightMode()
+    public void FadeNightMode()
     {
         if (!_nightMode)
         {
@@ -58,6 +59,21 @@ public class UI_Manager : MonoBehaviour
         {
             _nightMode = !_nightMode;
             _animator.SetTrigger("DayModeFadeIn");
+        }
+    }
+
+    // Triggers Menu Swap animation
+    public void MenuSwap()
+    {
+        if(_mainMenuActive)
+        {
+            _mainMenuActive = !_mainMenuActive;
+            _animator.SetTrigger("SwapToGestureList");
+        }
+        else
+        {
+            _mainMenuActive = !_mainMenuActive;
+            _animator.SetTrigger("SwapToMainMenu");
         }
     }
 
