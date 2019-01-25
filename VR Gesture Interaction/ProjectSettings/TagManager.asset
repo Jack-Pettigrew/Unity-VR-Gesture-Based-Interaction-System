@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UI Panel
   - NPC
+  - Environment
   layers:
   - Default
   - TransparentFX
