@@ -2698,7 +2698,7 @@ namespace AirSig {
             string dbPath = Application.streamingAssetsPath + "/";
             
             if (System.IO.Directory.Exists(dbPath)) { 
-                string[] files = System.IO.Directory.GetFiles(dbPath, "airsig_*.db", System.IO.SearchOption.TopDirectoryOnly);
+                string[] files = System.IO.Directory.GetFiles(dbPath, "AirSigDb.db", System.IO.SearchOption.TopDirectoryOnly);
                 if (files.Length <= 0) {
                     Debug.LogError("Db files do not exist!");
                     return;
