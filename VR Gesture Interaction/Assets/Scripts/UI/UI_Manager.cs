@@ -12,11 +12,14 @@ public class UI_Manager : MonoBehaviour
     private bool _nightMode = false;
     private bool _mainMenuActive = true;
 
-    // UI Handles
+    [Header("Text Variables")]
+    // Text Handles
     [SerializeField]
     private Text _timeText;
     [SerializeField]
     private Text _performedGestureText;
+    [SerializeField]
+    private Text _pleasureText, _arousalText, _dominanceText;
 
     private Animator _animator;
 
@@ -39,12 +42,6 @@ public class UI_Manager : MonoBehaviour
         _timeText.text = System.DateTime.Now.ToString();
  
         _performedGestureText.text = "Perform a Gesture!";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Triggers UI Night Mode animation
@@ -81,6 +78,14 @@ public class UI_Manager : MonoBehaviour
     public void SetPerformedGestureName(ref string gestureName)
     {
         _performedGestureText.text = gestureName;
+    }
+
+    // Updates the displayed PAD values in the UI
+    public void UpdatePADText(string p, string a, string d)
+    {
+        _pleasureText.text = "Pleasure: " + p + "f";
+        _arousalText.text = "Pleasure: " + a + "f";
+        _dominanceText.text = "Pleasure: " + d + "f";
     }
 
 }
