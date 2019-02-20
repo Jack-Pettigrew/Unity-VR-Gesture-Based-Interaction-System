@@ -938,6 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8776750f132fb4f9f5f904669d460e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 960339174}
   airsigManager: {fileID: 477998002}
 --- !u!4 &640815185
 Transform:
@@ -1510,7 +1511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960339173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84966fc11446ec446aa3a8419b1e7739, type: 3}
   m_Name: 
