@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private bool wave = false, thrust = false, shake = false, spooky = false;
 
     // PAD Manager
+    [SerializeField]
     private PADManager padManager;
 
     [SerializeField]
@@ -57,6 +58,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        // Get PAD Manager
+        padManager = GetComponent<PADManager>();
+
         // 1. Use SetMode to configure AirSig function
         airsigManager.SetMode(
             AirSigManager.Mode.DeveloperDefined);

@@ -743,6 +743,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c26d6bb006ade3140895d0799d9fe0da, type: 2}
+    - target: {fileID: 13700002, guid: 066323287b62d73409dfdc8b90341209, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e43ac6c97557b14d8cc54f466f1d853, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 066323287b62d73409dfdc8b90341209, type: 3}
 --- !u!1001 &477998001
@@ -942,6 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8776750f132fb4f9f5f904669d460e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  padManager: {fileID: 0}
   animator: {fileID: 960339174}
   airsigManager: {fileID: 477998002}
 --- !u!114 &640815184
@@ -956,6 +961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda95c7e28c3b6c4abc2c8ceabfecce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  socialState: 0
+  decreaseScalar: 10
 --- !u!4 &640815185
 Transform:
   m_ObjectHideFlags: 0
@@ -1845,15 +1853,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4154779130590934, guid: 00284cf2de272b74d864cac5ee59c480, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0897202
+      value: -3.354
       objectReference: {fileID: 0}
     - target: {fileID: 4154779130590934, guid: 00284cf2de272b74d864cac5ee59c480, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.79287183
+      value: -0.793
       objectReference: {fileID: 0}
     - target: {fileID: 4154779130590934, guid: 00284cf2de272b74d864cac5ee59c480, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5713027
+      value: 3.475
       objectReference: {fileID: 0}
     - target: {fileID: 4154779130590934, guid: 00284cf2de272b74d864cac5ee59c480, type: 3}
       propertyPath: m_LocalRotation.x
