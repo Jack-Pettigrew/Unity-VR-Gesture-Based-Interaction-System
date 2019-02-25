@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Waiting      =    not in conversation
+// Idle         =    in conversation - not interacting
+// Interacting  =    in conversation - interacting
+public enum Social_State { waiting, noInteraction, interacting };
+
 // Class providing PAD functionality                                                                                CHANGE SOCIAL STATE IN THE FIRST PLACE
 public class PADManager : MonoBehaviour
 {
@@ -10,11 +15,6 @@ public class PADManager : MonoBehaviour
     [Tooltip("Assigned on Play")]
     private UI_Manager ui;
     
-    [HideInInspector]
-    // Waiting     =    not in conversation
-    // Idle        =    in conversation - not interacting
-    // interaction =    in conversation - interacting
-    public enum Social_State {waiting, idle, interacting};
     [Tooltip("The current NPC social state")]
     public Social_State socialState;
     
@@ -43,11 +43,10 @@ public class PADManager : MonoBehaviour
     {
 
         // If NPC interaction -> Evaluate
-        if (socialState != Social_State.idle)
+        if (socialState != Social_State.waiting)
         {
             EvaluatePAD();
         }
-        // Else disable Game Manager
 
     }
 
@@ -106,6 +105,7 @@ public class PADManager : MonoBehaviour
                 break;
 
             case Social_State.waiting:
+
                 // Decrease timer for bordem
                 if (timer > 0f)
                     timer -= Time.time;
@@ -121,11 +121,12 @@ public class PADManager : MonoBehaviour
 
     }
 
-    // Bordem PAD decrease
+    // Bordem PAD decrease + UI Update
     public void BordemDecrease()
-    {
-                                                                                                                    // ********************
+    {                                                                                                     // ********************
         arousal -= (Time.time / decreaseScalar);
+
+        ui.UpdatePADText(pleasure.ToString(), arousal.ToString(), dominance.ToString());
     }
 
     // Changes the current NPC social state (e.g. idle, waiting, interacting)

@@ -5,6 +5,17 @@ using UnityEngine;
 // Sample code provided by http://www.airsig.com/
 using AirSig;
 
+// Gesture Callback Class
+
+/* NEEDS:
+ * isInteracting bool
+ * Gestures do not register unless isInteracting is true
+ * 
+ * Begin + End Interaction state changes
+ * 
+ * Interaction Begin -> Look at and button press
+ */
+
 public class GameManager : MonoBehaviour
 {
     // Thread workaround bools
