@@ -15,20 +15,30 @@ public class PADManager : MonoBehaviour
     [Tooltip("Assigned on Play")]
     private UI_Manager ui;
     
+    [Header("Social State")]
     [Tooltip("The current NPC social state")]
     public Social_State socialState;
-    
-    private float pleasure = 0.0f;
-    private float arousal = 0.0f;
-    private float dominance = 0.0f;
+
+    public float pleasure = 0.0f;
+    public float arousal = 0.0f;
+    public float dominance = 0.0f;
 
     private const float TIMER_START = 5.0f;
-    private float timer;
+    private float timer = 5.0f;
 
     [SerializeField]
     [Tooltip("Scales bordem decrease value (e.g. arousal / SCALAR")]
-    private float decreaseScalar = 10.0f;
+    private float boredomDecreaseScalar;
 
+    // Mesh Variables
+    [Header("PAD Emotive Materials")]
+    [SerializeField]
+    private SkinnedMeshRenderer meshRenderer;
+    [SerializeField]
+    private Material[] emotiveMaterials;
+
+    
+    
     private void Awake()
     {
         ui = FindObjectOfType<UI_Manager>();
@@ -47,12 +57,14 @@ public class PADManager : MonoBehaviour
         {
             EvaluatePAD();
         }
-
+        
     }
 
     // Adds to current PAD Values
     public void gestureEffect(float p, float a, float d)
     {
+        socialState = Social_State.interacting;
+
         pleasure += p;
         arousal += a;
         dominance += d;
@@ -62,8 +74,6 @@ public class PADManager : MonoBehaviour
         dominance = Mathf.Clamp(dominance, -1.0f, 1.0f);
 
         ui.UpdatePADText(pleasure.ToString(), arousal.ToString(), dominance.ToString());
-
-        socialState = Social_State.interacting;
     }
 
     // Resets all PAD values (interaction reset)
@@ -87,11 +97,25 @@ public class PADManager : MonoBehaviour
     // Performs behaviour adjustments based on current PAD
     public void EvaluatePAD()                                                               //***************************************
     {
+        // ============== Materials ==============
+        // Neutral
+        if((pleasure == 0.0f && arousal == 0.0f && dominance == 0.0f) && meshRenderer.material != emotiveMaterials[0])
+            meshRenderer.material = emotiveMaterials[0];
+        //Happy
+        else if ((pleasure >= 0.1f && arousal >= 0.1f && dominance <= -0.3f) && meshRenderer.material != emotiveMaterials[1])
+            meshRenderer.material = emotiveMaterials[1];
+        //Scared
+        else if ((pleasure <= -0.5f && arousal >= 0.4f && dominance <= -0.1f) && meshRenderer.material != emotiveMaterials[2])
+            meshRenderer.material = emotiveMaterials[2];
+        //Angry
+        else if ((pleasure <= -0.5f && arousal >= 0.1f && dominance >= 0.4f) && meshRenderer.material != emotiveMaterials[3])
+            meshRenderer.material = emotiveMaterials[3];
+
         /* Check PAD values then:
-           - Change State Material
-           - Enable Game Manager(Checks Gesture)
-           - Change Sound Files(Angry = Angry Speech)
-           - Change Animation emphasis(Sad = Sad Wave)
+           - Change State Material                          [x]
+           - Enable Game Manager(Checks Gesture)            [ ] -> ?
+           - Change Sound Files(Angry = Angry Speech)       [ ]
+           - Change Animation emphasis(Sad = Sad Wave)      [ ]
         */
 
         // Check state
@@ -102,15 +126,25 @@ public class PADManager : MonoBehaviour
                 // Reset Bordem Timer
                 timer = TIMER_START;
 
+                socialState = Social_State.noInteraction;
+
+                break;
+
+            case Social_State.noInteraction:
+
+                // Decrease timer for bordem
+                if (timer >= 0.0f)
+                    timer -= Time.deltaTime;
+                else if (arousal >= -1.0f)
+                {
+                    BordemDecrease();
+                }
+
                 break;
 
             case Social_State.waiting:
 
-                // Decrease timer for bordem
-                if (timer > 0f)
-                    timer -= Time.time;
-                else if (arousal > -1.0f)
-                    BordemDecrease();
+                // Ignore this enum
 
                 break;
 
@@ -123,13 +157,13 @@ public class PADManager : MonoBehaviour
 
     // Bordem PAD decrease + UI Update
     public void BordemDecrease()
-    {                                                                                                     // ********************
-        arousal -= (Time.time / decreaseScalar);
+    { 
+        arousal -= (Time.deltaTime * boredomDecreaseScalar);
 
-        ui.UpdatePADText(pleasure.ToString(), arousal.ToString(), dominance.ToString());
+        ui.UpdatePADText(pleasure.ToString("0.00"), arousal.ToString("0.00"), dominance.ToString("0.00"));
     }
 
-    // Changes the current NPC social state (e.g. idle, waiting, interacting)
+    // Changes the current NPC social state (e.g. waiting, noInteraction, interacting)
     public void ChangeSocialState(Social_State state)
     {
         socialState = state;

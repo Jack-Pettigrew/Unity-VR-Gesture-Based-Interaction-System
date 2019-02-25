@@ -84,8 +84,8 @@ public class UI_Manager : MonoBehaviour
     public void UpdatePADText(string p, string a, string d)
     {
         _pleasureText.text = "Pleasure: " + p + "f";
-        _arousalText.text = "Pleasure: " + a + "f";
-        _dominanceText.text = "Pleasure: " + d + "f";
+        _arousalText.text = "Arousal: " + a + "f";
+        _dominanceText.text = "Dominance: " + d + "f";
     }
 
 }
