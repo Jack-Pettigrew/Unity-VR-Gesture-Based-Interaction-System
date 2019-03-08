@@ -106,25 +106,25 @@ public class GameManager : MonoBehaviour
         {
             wave = !wave;
             animator.SetTrigger("Wave");
-            padManager.gestureEffect(0.3f, 0.4f, 0.2f);
+            padManager.gestureEffect(0.3f, 0.4f, -0.2f);
         }
         if (thrust)
         {
             thrust = !thrust;
             animator.SetTrigger("ToAngry");
-            padManager.gestureEffect(0.3f, 0.2f, -0.2f);
+            padManager.gestureEffect(-0.5f, 0.4f, -0.3f);
         }
         if (shake)
         {
             shake = !shake;
             animator.SetTrigger("Shake");
-            padManager.gestureEffect(-0.4f, 0.3f, -0.5f);
+            padManager.gestureEffect(0.3f, -0.3f, -0.4f);
         }
         if (spooky)
         {
             spooky = !spooky;
             animator.SetTrigger("Shocked");
-            padManager.gestureEffect(-0.3f, 0.1f, -0.2f);
+            padManager.gestureEffect(-0.3f, 0.1f, -0.4f);
         }
 
     }

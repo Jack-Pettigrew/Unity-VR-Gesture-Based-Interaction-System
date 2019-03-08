@@ -102,18 +102,17 @@ public class PADManager : MonoBehaviour
         if((pleasure == 0.0f && arousal == 0.0f && dominance == 0.0f) && meshRenderer.material != emotiveMaterials[0])
             meshRenderer.material = emotiveMaterials[0];
         //Happy
-        else if ((pleasure >= 0.1f && arousal >= 0.1f && dominance <= -0.3f) && meshRenderer.material != emotiveMaterials[1])
+        else if ((pleasure > 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[1])
             meshRenderer.material = emotiveMaterials[1];
         //Scared
-        else if ((pleasure <= -0.5f && arousal >= 0.4f && dominance <= -0.1f) && meshRenderer.material != emotiveMaterials[2])
+        else if ((pleasure < 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[2])
             meshRenderer.material = emotiveMaterials[2];
         //Angry
-        else if ((pleasure <= -0.5f && arousal >= 0.1f && dominance >= 0.4f) && meshRenderer.material != emotiveMaterials[3])
+        else if ((pleasure < 0.0f && arousal > 0.0f && dominance > 0.0f) && meshRenderer.material != emotiveMaterials[3])
             meshRenderer.material = emotiveMaterials[3];
 
         /* Check PAD values then:
            - Change State Material                          [x]
-           - Enable Game Manager(Checks Gesture)            [ ] -> ?
            - Change Sound Files(Angry = Angry Speech)       [ ]
            - Change Animation emphasis(Sad = Sad Wave)      [ ]
         */
