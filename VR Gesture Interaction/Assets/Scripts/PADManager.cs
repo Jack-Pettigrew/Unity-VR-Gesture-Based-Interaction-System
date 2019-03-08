@@ -7,6 +7,8 @@ using UnityEngine;
 // Interacting  =    in conversation - interacting
 public enum Social_State { waiting, noInteraction, interacting };
 
+public enum Mood_State { neutral, sad, angry };
+
 // Class providing PAD functionality                                                                                CHANGE SOCIAL STATE IN THE FIRST PLACE
 public class PADManager : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class PADManager : MonoBehaviour
     [Header("Social State")]
     [Tooltip("The current NPC social state")]
     public Social_State socialState;
+    public Mood_State moodState;
 
     public float pleasure = 0.0f;
     public float arousal = 0.0f;
@@ -37,6 +40,7 @@ public class PADManager : MonoBehaviour
     [SerializeField]
     private Material[] emotiveMaterials;
 
+    public AnimationManager aniManager;
     
     
     private void Awake()
@@ -46,6 +50,8 @@ public class PADManager : MonoBehaviour
         timer = TIMER_START;
 
         socialState = Social_State.waiting;
+
+        moodState = Mood_State.neutral;
 
     }
 
@@ -99,25 +105,39 @@ public class PADManager : MonoBehaviour
     {
         // ============== Materials ==============
         // Neutral
-        if((pleasure == 0.0f && arousal == 0.0f && dominance == 0.0f) && meshRenderer.material != emotiveMaterials[0])
+        if ((pleasure == 0.0f && arousal == 0.0f && dominance == 0.0f) && meshRenderer.material != emotiveMaterials[0])
+        {
             meshRenderer.material = emotiveMaterials[0];
+            moodState = Mood_State.neutral;
+        }
         //Happy
         else if ((pleasure > 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[1])
+        {
             meshRenderer.material = emotiveMaterials[1];
+            moodState = Mood_State.neutral;
+        }
         //Scared
         else if ((pleasure < 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[2])
+        {
             meshRenderer.material = emotiveMaterials[2];
+            moodState = Mood_State.sad;
+        }
         //Angry
         else if ((pleasure < 0.0f && arousal > 0.0f && dominance > 0.0f) && meshRenderer.material != emotiveMaterials[3])
+        {
             meshRenderer.material = emotiveMaterials[3];
+            moodState = Mood_State.angry;
+        }
 
+        aniManager.AnimationEvaluation(moodState);
+        
         /* Check PAD values then:
            - Change State Material                          [x]
            - Change Sound Files(Angry = Angry Speech)       [ ]
            - Change Animation emphasis(Sad = Sad Wave)      [ ]
         */
 
-        // Check state
+        // Check Social state
         switch (socialState)
         {
             case Social_State.interacting:

@@ -963,6 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   socialState: 0
+  moodState: 0
   pleasure: 0
   arousal: 0
   dominance: 0
@@ -973,6 +974,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d8cd375398cb39343b4ded25d2b887cc, type: 2}
   - {fileID: 2100000, guid: 40e551deb99eaf54885351f456be4bda, type: 2}
   - {fileID: 2100000, guid: 5b77b585414c27a4e8a65c01c25023aa, type: 2}
+  aniManager: {fileID: 960339177}
 --- !u!4 &640815185
 Transform:
   m_ObjectHideFlags: 0
@@ -1544,11 +1546,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960339173}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84966fc11446ec446aa3a8419b1e7739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &960339177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960339173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03f7754318d88441ba733c7c1911c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ani: {fileID: 0}
+  neutral: 1
+  sad: 0
+  angry: 0
 --- !u!137 &1003786699 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 13700002, guid: 066323287b62d73409dfdc8b90341209,
