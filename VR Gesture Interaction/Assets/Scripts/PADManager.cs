@@ -7,7 +7,7 @@ using UnityEngine;
 // Interacting  =    in conversation - interacting
 public enum Social_State { waiting, noInteraction, interacting };
 
-public enum Mood_State { neutral, sad, angry };
+public enum Mood_State { neutral, sad, angry, happy };
 
 // Class providing PAD functionality                                                                                CHANGE SOCIAL STATE IN THE FIRST PLACE
 public class PADManager : MonoBehaviour
@@ -114,7 +114,7 @@ public class PADManager : MonoBehaviour
         else if ((pleasure > 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[1])
         {
             meshRenderer.material = emotiveMaterials[1];
-            moodState = Mood_State.neutral;
+            moodState = Mood_State.happy;
         }
         //Scared
         else if ((pleasure < 0.0f && arousal > 0.0f && dominance < 0.0f) && meshRenderer.material != emotiveMaterials[2])
@@ -133,8 +133,8 @@ public class PADManager : MonoBehaviour
         
         /* Check PAD values then:
            - Change State Material                          [x]
+           - Change Animation emphasis(Sad = Sad Wave)      [x]
            - Change Sound Files(Angry = Angry Speech)       [ ]
-           - Change Animation emphasis(Sad = Sad Wave)      [ ]
         */
 
         // Check Social state

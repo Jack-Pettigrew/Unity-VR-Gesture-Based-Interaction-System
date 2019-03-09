@@ -20,18 +20,28 @@ public class AnimationManager : MonoBehaviour
         {
             case Mood_State.neutral:
                 ani.SetBool("Neutral", true);
+                ani.SetBool("Happy", false);
+                ani.SetBool("Sad", false);
+                ani.SetBool("Angry", false);
+
+                break;
+            case Mood_State.happy:
+                ani.SetBool("Happy", true);
+                ani.SetBool("Neutral", false);
                 ani.SetBool("Sad", false);
                 ani.SetBool("Angry", false);
 
                 break;
             case Mood_State.sad:
                 ani.SetBool("Neutral", false);
+                ani.SetBool("Happy", false);
                 ani.SetBool("Sad", true);
                 ani.SetBool("Angry", false);
 
                 break;
             case Mood_State.angry:
                 ani.SetBool("Neutral", false);
+                ani.SetBool("Happy", false);
                 ani.SetBool("Sad", false);
                 ani.SetBool("Angry", true);
 
