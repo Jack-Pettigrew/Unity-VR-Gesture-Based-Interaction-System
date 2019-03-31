@@ -49,7 +49,7 @@ public class PADManager : MonoBehaviour
 
         timer = TIMER_START;
 
-        socialState = Social_State.waiting;
+        socialState = Social_State.interacting;
 
         moodState = Mood_State.neutral;
 
@@ -101,7 +101,7 @@ public class PADManager : MonoBehaviour
     }
 
     // Performs behaviour adjustments based on current PAD
-    public void EvaluatePAD()                                                               //***************************************
+    private void EvaluatePAD()                                                               //***************************************
     {
         // ============== Materials ==============
         // Neutral
@@ -175,7 +175,7 @@ public class PADManager : MonoBehaviour
     }
 
     // Bordem PAD decrease + UI Update
-    public void BordemDecrease()
+    private void BordemDecrease()
     { 
         arousal -= (Time.deltaTime * boredomDecreaseScalar);
 
