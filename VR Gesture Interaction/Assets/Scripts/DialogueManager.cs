@@ -4,89 +4,68 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
-public enum Response { neutral, positive, negative }
-
 [System.Serializable]
-public struct Dialogue
+public struct Response
 {
-    [TextArea]
-    public string dialogue;
-    public string animationTriggerName;
-    public Response responseType;
-    public Vector3 padEffect;
-    public bool finished;
-
+    public string sentence;
+    public string animationName;
 }
 
 [RequireComponent(typeof(AudioSource))]
 public class DialogueManager : MonoBehaviour
 {
-    [Header("Non-Prefab Dialogue UI"), SerializeField]
-    private GameObject npc;
+    [Header("NPC"), SerializeField]
+    private GameObject actor;
     private Animator npc_animator;
-    [SerializeField]
-    private Text npc_Name;
-    [SerializeField]
-    private Text npc_Dialogue_Text;
 
     [Header("Dialogue Properties"), SerializeField]
-    private bool playerGestures = false;
+    private Text npc_Dialogue_Text;
     [SerializeField]
     private float textDelay = 0.05f;
     [SerializeField]
     private AudioClip sound;
     private AudioSource audioSource;
-    [SerializeField]
 
     [Header("NPC Dialogue")]
-    public int currentDialoguePosition = 0;
-    public Dialogue[] npcDialogues;
+    public Response[] responses;
     private PADManager padManager;
 
     void Start()
     {
-        npc_animator = npc.GetComponent<Animator>();
+        npc_animator = actor.GetComponent<Animator>();
         padManager = FindObjectOfType<PADManager>();
 
         audioSource = GetComponent<AudioSource>();
         audioSource.spatialBlend = 0.0f;
-
-        npc_Name.text = npc.name;
-
-        StartCoroutine(Dialogue());
     }
 
-    private void Update()
+    public void WaveResponse()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            StartCoroutine(Dialogue());
+        StartCoroutine(WriteDialogue(responses[0].sentence, responses[0].animationName));
     }
 
-    IEnumerator Dialogue()
+    public void ShakeResponse()
     {
-        /// Null checking
-        if (npcDialogues == null)
-        {
-            Debug.LogError("NPC Dialogue is NULL");
-            yield return null;
-        }
+        StartCoroutine(WriteDialogue(responses[1].sentence, responses[1].animationName));
+    }
 
-        // Print out each letter
-        Dialogue current = npcDialogues[currentDialoguePosition];
+    public void SpookResponse()
+    {
+        StartCoroutine(WriteDialogue(responses[2].sentence, responses[2].animationName));
+    }
 
-        // Iterate current Dialogue Pos
-        currentDialoguePosition++;
+    public void AngerResponse()
+    {
+        StartCoroutine(WriteDialogue(responses[3].sentence, responses[3].animationName));
+    }
 
-        // PAD Manager Handling
-        padManager.socialState = Social_State.interacting;
-        padManager.gestureEffect(current.padEffect.x, current.padEffect.y, current.padEffect.z);
+    IEnumerator WriteDialogue(string sentence, string animationName)
+    {
 
-        // Dialogue Animation Handling
-        if (current.animationTriggerName != "" && !playerGestures)
-            npc_animator.SetTrigger(current.animationTriggerName);
+        npc_animator.SetTrigger(animationName);
 
         string currentText = "";
-        foreach (char letter in current.dialogue)
+        foreach (char letter in sentence)
         {
 
             // Text Handling
@@ -112,7 +91,7 @@ public class DialogueManager : MonoBehaviour
                     yield return new WaitForSeconds(0.05f);
                     break;
             }
-        }
+        }          
 
         yield return null;
     }

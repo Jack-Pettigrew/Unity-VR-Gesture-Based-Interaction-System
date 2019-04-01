@@ -19,11 +19,13 @@ using AirSig;
 public class GameManager : MonoBehaviour
 {
     // Thread workaround bools
-    private bool wave = false, thrust = false, shake = false, spooky = false;
+    public bool wave = false, thrust = false, shake = false, spooky = false;
 
     // PAD Manager
     [SerializeField]
     private PADManager padManager;
+
+    private DialogueManager dm;
 
     [SerializeField]
     private Animator animator;
@@ -105,25 +107,25 @@ public class GameManager : MonoBehaviour
         if (wave)
         {
             wave = !wave;
-            animator.SetTrigger("Wave");
+            dm.WaveResponse();
             padManager.gestureEffect(0.3f, 0.4f, -0.2f);
         }
         if (thrust)
         {
             thrust = !thrust;
-            animator.SetTrigger("ToAngry");
+            dm.AngerResponse();
             padManager.gestureEffect(-0.5f, 0.4f, -0.3f);
         }
         if (shake)
         {
             shake = !shake;
-            animator.SetTrigger("Shake");
+            dm.ShakeResponse();
             padManager.gestureEffect(0.3f, -0.3f, -0.4f);
         }
         if (spooky)
         {
             spooky = !spooky;
-            animator.SetTrigger("Shocked");
+            dm.SpookResponse();
             padManager.gestureEffect(-0.3f, 0.1f, -0.4f);
         }
 

@@ -4,42 +4,35 @@ using UnityEngine;
 
 public class TestAnimation : MonoBehaviour
 {
-    private Animator animator;
+    private DialogueManager dm;
 
-    void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        dm = FindObjectOfType<DialogueManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-
-        if(Input.GetKeyDown(KeyCode.D))
+        if(Input.GetKeyDown(KeyCode.W))
         {
-            animator.SetTrigger("ToAngry");
+            dm.WaveResponse();
         }
+
 
         if(Input.GetKeyDown(KeyCode.A))
         {
-            animator.SetTrigger("Wave");
+            dm.ShakeResponse();
         }
 
-        if(Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            animator.SetTrigger("Shake");
+            dm.SpookResponse();
         }
 
-        if(Input.GetKeyDown(KeyCode.S))
+        if(Input.GetKeyDown(KeyCode.D))
         {
-            animator.SetTrigger("Shocked");
+            dm.AngerResponse();
         }
     }
 }
