@@ -21,12 +21,16 @@ public class NpcNav : MonoBehaviour
         ani = GetComponent<Animator>();
 
         pointTimer = TIMER_CONST;
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        float velx = nma.velocity.x;
+        float velz = nma.velocity.z;
+        ani.SetFloat("VelocityX", velx);
+        ani.SetFloat("VelocityZ", velz);
+
         if (this.transform.position == nma.pathEndPosition)
         {
             pointTimer -= Time.deltaTime;
