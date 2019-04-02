@@ -25,6 +25,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private AudioClip sound;
     private AudioSource audioSource;
+    public const float DIALOGUE_TIMER_CONST = 3.0f;
+    private float timer;
+    public bool isDisplaying = false;
 
     [Header("NPC Dialogue")]
     public Response[] responses;
@@ -37,6 +40,25 @@ public class DialogueManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         audioSource.spatialBlend = 0.0f;
+
+        timer = DIALOGUE_TIMER_CONST;
+    }
+
+    private void Update()
+    {
+        
+        if(isDisplaying)
+        {
+            timer -= Time.deltaTime;
+        }
+
+        if(timer <= 0)
+        {
+            isDisplaying = false;
+            timer = DIALOGUE_TIMER_CONST;
+            ResetText();
+        }
+
     }
 
     public void WaveResponse()
@@ -57,6 +79,11 @@ public class DialogueManager : MonoBehaviour
     public void AngerResponse()
     {
         StartCoroutine(WriteDialogue(responses[3].sentence, responses[3].animationName));
+    }
+
+    public void ResetText()
+    {
+        npc_Dialogue_Text.text = "";
     }
 
     IEnumerator WriteDialogue(string sentence, string animationName)
@@ -91,7 +118,9 @@ public class DialogueManager : MonoBehaviour
                     yield return new WaitForSeconds(0.05f);
                     break;
             }
-        }          
+        }
+
+        isDisplaying = true;
 
         yield return null;
     }
