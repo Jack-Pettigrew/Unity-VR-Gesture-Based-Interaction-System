@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         {
             shake = !shake;
             dm.ShakeResponse();
-            padManager.gestureEffect(0.3f, -0.3f, -0.4f);
+            padManager.gestureEffect(0.3f, -0.3f, 0.4f);
         }
         if (spooky)
         {
