@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PADManager padManager;
 
-    private DialogueManager dm;
+    public DialogueManager dm;
 
     [SerializeField]
     private Animator animator;
@@ -101,6 +101,11 @@ public class GameManager : MonoBehaviour
             developerGesture;
     }
 
+    public void Start()
+    {
+        dm = FindObjectOfType<DialogueManager>();
+    }
+
     private void Update()
     {
 
@@ -108,19 +113,19 @@ public class GameManager : MonoBehaviour
         {
             wave = !wave;
             dm.WaveResponse();
-            padManager.gestureEffect(0.3f, 0.4f, -0.2f);
+            padManager.gestureEffect(0.3f, 0.3f, -0.2f);
         }
         if (thrust)
         {
             thrust = !thrust;
             dm.AngerResponse();
-            padManager.gestureEffect(-0.5f, 0.4f, -0.3f);
+            padManager.gestureEffect(-0.5f, 0.5f, 0.5f);
         }
         if (shake)
         {
             shake = !shake;
             dm.ShakeResponse();
-            padManager.gestureEffect(0.3f, -0.3f, 0.4f);
+            padManager.gestureEffect(0.2f, -0.2f, 0.3f);
         }
         if (spooky)
         {
