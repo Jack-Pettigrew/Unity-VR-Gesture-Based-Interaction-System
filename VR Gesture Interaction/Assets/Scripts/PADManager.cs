@@ -79,7 +79,7 @@ public class PADManager : MonoBehaviour
         arousal = Mathf.Clamp(arousal, -1.0f, 1.0f);
         dominance = Mathf.Clamp(dominance, -1.0f, 1.0f);
 
-        ui.UpdatePADText(pleasure.ToString(), arousal.ToString(), dominance.ToString());
+        ui.UpdatePADText(pleasure.ToString("0.00"), arousal.ToString("0.00"), dominance.ToString("0.00"));
     }
 
     // Resets all PAD values (interaction reset)
